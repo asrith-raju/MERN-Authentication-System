@@ -42,7 +42,7 @@ export const login = async (req,res)=>{
     try {
         const user = await userModel.findOne({email})
         if(!user){
-            return res.json({success:false,message:"User Not Found"})   
+            return res.json({success:false,message:"Invalid email"})   
         }
        const isMatch = await bcrypt.compare(password,user.password)
 
