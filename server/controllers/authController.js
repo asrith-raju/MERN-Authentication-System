@@ -28,6 +28,7 @@ export const register = async (req,res)=>{
         sameSite:process.env.NODE_ENV === 'production' ? 'none' : 'strict',
         maxAge:7*24*60*60*1000
         })
+         
         res.json({success:true})
     } catch (error) {
         res.json({success:false,message:error.message})
