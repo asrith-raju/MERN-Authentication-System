@@ -93,7 +93,7 @@ export const sendVerifyOtp = async (req,res)=>{
     try {
         const {userId} = req.body;
         const user = await userModel.findById(userId);
-        if(user.isAccoundVerified){
+        if(user.isAccountVerified){
             return res.json({success:false,message:"Account already verified"})
         }
         const otp = String(Math.floor(100000+Math.random()*900000))
@@ -132,7 +132,7 @@ export const verifyEmail = async (req,res)=>{
         if(user.verifyOtpExpireAt < Date.now()){
             return res.json({success:false,message:"OTP Expired"})
         }
-        user.isAccoundVerified = true;
+        user.isAccountVerified = true;
         user.verifyOtp = '';
         user.verifyOtpExpireAt = 0;
         await user.save();
