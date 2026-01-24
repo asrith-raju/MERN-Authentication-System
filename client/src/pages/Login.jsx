@@ -13,14 +13,16 @@ const Login = () => {
             <p className='text-center text-sm mb-6'>{state === 'Sign Up' ? 'Create your account' : 'Login to your Account!'}</p>
 
             <form>
-                <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
+                {state === 'Sign Up' && (<div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
                     <img src={assets.person_icon} alt="" />
                     <input className='bg-transparent outline-none' type="text" placeholder='Full Name' required/>
-                </div>
+                </div>)}
+                
                 <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
                     <img src={assets.mail_icon} alt="" />
                     <input className='bg-transparent outline-none' type="email" placeholder='Email id' required/>
                 </div>
+
                 <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
                     <img src={assets.lock_icon} alt="" />
                     <input className='bg-transparent outline-none' type="password" placeholder='Password' required/>
@@ -30,6 +32,15 @@ const Login = () => {
 
                 <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium'>{state}</button>
             </form>
+
+            {state === 'Sign Up' ? (<p className='text-gray-400 text-center text-xs mt-4'>Already have an account?{' '}
+                <span onClick={()=>setState('Login')} className='text-blue-400 cursor-pointer underline'>Login here</span>
+            </p>)
+            :
+            (<p className='text-gray-400 text-center text-xs mt-4'>Don't have an account?{' '}
+                <span onClick={()=>setState('Sign Up')} className='text-blue-400 cursor-pointer underline'>Sign up</span>
+            </p>)}
+            
             
         </div>
     </div>
