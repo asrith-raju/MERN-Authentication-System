@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 const Login = () => {
     const navigate = useNavigate()
 
-    const {backendUrl,setIsLoggedin} = useContext(AppContext)
+    const {backendUrl,setIsLoggedin,getUserData} = useContext(AppContext)
 
     const [state, setState] = useState('Sign Up')
     const [name, setName] = useState('')
@@ -28,6 +28,7 @@ const Login = () => {
                })
                if(data.success){
                 setIsLoggedin(true)
+                getUserData()
                 navigate('/')
                }else{
                toast.error(data.message)
@@ -38,13 +39,14 @@ const Login = () => {
                })
                if(data.success){
                 setIsLoggedin(true)
+                getUserData()
                 navigate('/')
                }else{
                toast.error(data.message)
             }
             }
          } catch (error) {
-            toast.error(data.message)
+            toast.error(error.message)
          }
     }
   return (
@@ -77,7 +79,7 @@ const Login = () => {
 
                 <p onClick={()=>navigate('/reset-password')} className='mb-4 text-indigo-500 cursor-pointer'>Forgot Password?</p>
 
-                <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium'>{state}</button>
+                <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium cursor-pointer'>{state}</button>
             </form>
 
             {state === 'Sign Up' ? (<p className='text-gray-400 text-center text-xs mt-4'>Already have an account?{' '}
