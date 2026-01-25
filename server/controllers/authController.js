@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken'
-import userModel from "../models/UserModel.js";
+import userModel from "../models/User.js";
 import transporter from "../config/nodeMailer.js";
 import { EMAIL_VERIFY_TEMPLATE,PASSWORD_RESET_TEMPLATE } from "../config/emailTemplates.js";
 
