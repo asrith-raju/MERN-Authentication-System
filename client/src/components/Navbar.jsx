@@ -2,11 +2,24 @@ import React, { useContext } from 'react'
 import {assets} from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Navbar = () => {
     const navigate = useNavigate()
     const {userData,backendUrl,setUserData,setIsLoggedin} = useContext(AppContext)
-     
+    const logout = async () => {
+      try {
+        axios.defaults.withCredentials = true
+        const {data} = await axios.post(backendUrl + '/api/auth/logout')
+        data.success && setIsLoggedin(false)
+        data.success && setUserData(false)
+        navigate('/')
+
+      } catch (error) {
+        toast.error(error.message)
+      }
+    }
   return (
     <div className='w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0'>
       <img src={assets.logo} alt="Logo" className='w-28 sm:w-32'/>
