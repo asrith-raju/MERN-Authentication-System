@@ -11,21 +11,23 @@ export const AppContextProvider = (props) =>{
    const [userData,setUserData] = useState(false)
 
    const getAuthState = async () => {
-      try {
-        const {data} = await axios.get( backendUrl + '/api/auth/is-auth',{ withCredentials: true })
-        if(data.success){
-          setIsLoggedin(true)
-          getUserData()
-        }
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-                setIsLoggedin(false);
-                setUserData(false);
-            } else {
-                toast.error("Error checking auth state");
-            }
-      }
-   }
+  try {
+    const { data } = await axios.get(
+      backendUrl + "/api/auth/is-auth",
+      { withCredentials: true }
+    );
+
+    if (data.success) {
+      setIsLoggedin(true);
+      getUserData();
+    }
+  } catch (error) {
+    // 🔕 SILENT FAIL — THIS IS CORRECT
+    setIsLoggedin(false);
+    setUserData(null);
+  }
+};
+
 
    const getUserData = async () => {
      try {
