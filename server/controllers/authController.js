@@ -91,7 +91,7 @@ export const logout = async (req,res)=>{
 // send verification otp to user's email
 export const sendVerifyOtp = async (req,res)=>{
     try {
-        const {userId} = req.body;
+        const {userId} = req.userId ;
         const user = await userModel.findById(userId);
         if(user.isAccountVerified){
             return res.json({success:false,message:"Account already verified"})
@@ -117,7 +117,8 @@ export const sendVerifyOtp = async (req,res)=>{
 }
 //verify email using otp
 export const verifyEmail = async (req,res)=>{
-    const {userId,otp} = req.body;
+    const { otp } = req.body;
+    const userId = req.userId;
     if(!userId || !otp){
         return res.json({success:false,message:"Missing Details"})
     }
@@ -126,7 +127,7 @@ export const verifyEmail = async (req,res)=>{
         if(!user){
             return res.json({success:false,message:"User not found"})
         }
-        if(user.VerifyOtp === '' || user.verifyOtp !== otp){
+        if(user.verifyOtp === '' || user.verifyOtp !== otp){
             return res.json({success:false,message:"Invalid OTP"})
         }
         if(user.verifyOtpExpireAt < Date.now()){
