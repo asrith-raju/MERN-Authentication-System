@@ -8,6 +8,23 @@ import { toast } from 'react-toastify'
 const Navbar = () => {
     const navigate = useNavigate()
     const {userData,backendUrl,setUserData,setIsLoggedin} = useContext(AppContext)
+
+    const sendVerificationOtp = async () => {
+      try {
+        axios.defaults.withCredentials=true
+
+        const {data} = await axios.post(backendUrl + '/api/auth/send-verify-otp')
+        if(data.success){
+          navigate('/email-verify')
+          toast.success(data.message)
+        }else{
+          toast.error(data.message)
+        }
+      } catch (error) {
+        toast.error(error.message)
+      }
+    }
+
     const logout = async () => {
       try {
         axios.defaults.withCredentials = true
