@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 connectDB()
 
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['http://localhost:5173', process.env.VITE_BACKEND_URL]
 app.use(express.json());
 
 app.use(cookieParser());
@@ -30,3 +30,5 @@ app.use('/api/user',userRouter)
 app.listen(PORT, ()=>{
     console.log(`Server started on PORT: ${PORT}`);
 })
+
+export default app;
