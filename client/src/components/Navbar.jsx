@@ -30,7 +30,7 @@ const Navbar = () => {
              <ul className='list-none m-0 p-2 bg-gray-100 text-sm'>
               {!userData.isVerified && <li  className='py-1 px-2 hover:bg-gray-200 cursor-pointer'>Verify email</li> }
               
-              <li className='py-1 px-2 hover:bg-gray-200 cursor-pointer pr-10'>Logout</li>
+              <li onClick={logout} className='py-1 px-2 hover:bg-gray-200 cursor-pointer pr-10'>Logout</li>
              </ul>
         </div>
       </div> : 
